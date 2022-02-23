@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/bloc/cart_items_bloc.dart';
+import 'package:untitled1/pages/payment.dart';
 
 
 class Checkout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Checkout')),
+      appBar: AppBar(title: Text('Checkout'),
+        backgroundColor: Colors.black,
+      ),
+
       body: StreamBuilder(
         stream: bloc.getStream,
         initialData: bloc.allItems,
@@ -18,7 +22,7 @@ class Checkout extends StatelessWidget {
                     RaisedButton(
                       onPressed: () {},
                       child: Text("Checkout"),
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.orange[800],
                     ),
                     SizedBox(height: 40)
                   ],
@@ -37,11 +41,19 @@ Widget checkoutListBuilder(snapshot) {
       final cartList = snapshot.data["cart items"];
       return ListTile(
         title: Text(cartList[i]['name']),
-        subtitle: Text("\$${cartList[i]['price']}"),
+        subtitle: Text("\$${cartList[i]['price']} \n${cartList[i]['item count']}",),
+
+
+
         leading: IconButton(
+
           icon: Icon(Icons.payments_rounded),
-          onPressed: () => print('select'),
+          onPressed: () =>
+              Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) =>  Payment ())),
         ),
+
+
 
         trailing: IconButton(
           icon: Icon(Icons.remove_shopping_cart),
@@ -49,7 +61,9 @@ Widget checkoutListBuilder(snapshot) {
             bloc.removeFromCart(cartList[i]);
           },
         ),
+
         onTap: () {},
+
       );
     },
   );

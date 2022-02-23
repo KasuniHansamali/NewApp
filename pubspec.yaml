@@ -60,6 +60,10 @@ flutter:
     - assets/images/car.jpg
     - assets/images/2_bag.jpg
     - assets/images/shoes.jpg
+    - assets/images/apple.png
+    - assets/images/paypal.png
+    - assets/images/viisa.png
+    - assets/images/Mastercard.png
 
 
 

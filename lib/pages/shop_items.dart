@@ -6,11 +6,23 @@ class ShopItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Cart App'),
+        title: Text('Shopping'),
+        backgroundColor: Colors.black,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () => Navigator.pushNamed(context, '/checkout'),
+          Row(
+            children: [
+              StreamBuilder(
+                  initialData: bloc.allItems,
+                  stream: bloc.getStream,
+                builder: (context,AsyncSnapshot<dynamic> snapshot) {
+                    return Text("${snapshot.data["cart items"].length}");
+                }
+              ),
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () => Navigator.pushNamed(context, '/checkout'),
+              ),
+            ],
           )
         ],
       ),
@@ -40,8 +52,9 @@ Widget shopItemsListBuilder(snapshot) {
       final shopList = snapshot.data["shop items"];
       return ListTile(
         title: Text(shopList[i]['name']),
-        subtitle: Text("\$${shopList[i]['price']}"),
-        trailing: IconButton(
+        subtitle: Text("\$${shopList[i]['price']}\n${shopList[i]['item count']}"),
+        trailing:
+        IconButton(
           icon: Icon(Icons.add_shopping_cart),
           onPressed: () {
             bloc.addToCart(shopList[i]);
