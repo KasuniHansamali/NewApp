@@ -38,6 +38,11 @@ Widget checkoutListBuilder(snapshot) {
       return ListTile(
         title: Text(cartList[i]['name']),
         subtitle: Text("\$${cartList[i]['price']}"),
+        leading: IconButton(
+          icon: Icon(Icons.payments_rounded),
+          onPressed: () => print('select'),
+        ),
+
         trailing: IconButton(
           icon: Icon(Icons.remove_shopping_cart),
           onPressed: () {
