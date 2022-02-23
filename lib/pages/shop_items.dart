@@ -53,13 +53,17 @@ Widget shopItemsListBuilder(snapshot) {
       return ListTile(
         title: Text(shopList[i]['name']),
         subtitle: Text("\$${shopList[i]['price']}\n${shopList[i]['item count']}"),
-        trailing:
-        IconButton(
+        trailing: IconButton(
           icon: Icon(Icons.add_shopping_cart),
           onPressed: () {
             bloc.addToCart(shopList[i]);
           },
         ),
+          leading: SizedBox(
+              height: 100.0,
+              width: 100.0, // fixed width and height
+              child: Image.asset('assets/images/shopping.jpg')
+          ),
         onTap: () {},
       );
     },
